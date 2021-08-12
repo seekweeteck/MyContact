@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Contact</string>
+    <string name="greeting">Salut tout le monde</string>
+</resources>
