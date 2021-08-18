@@ -1,6 +1,10 @@
 package my.tarc.mycontact
 
-data class Contact (val name: String, val phone: String) {
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "contact")
+data class Contact (val name: String, @PrimaryKey val phone: String) {
     override fun toString(): String {
         return "$name : $phone"
     }

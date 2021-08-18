@@ -13,13 +13,16 @@
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_FirstFragment_to_SettingsFragment"
             app:destination="@id/SettingsFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_AboutFragment"
-            app:destination="@id/AboutFragment" />
+            app:destination="@id/AboutFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_FirstFragment_to_ProfileFragment"
             app:destination="@id/ProfileFragment" />
@@ -32,7 +35,9 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/FirstFragment"
+            app:popUpTo="@id/FirstFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/SettingsFragment"

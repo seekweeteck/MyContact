@@ -2,11 +2,11 @@ package my.tarc.mycontact
 
 import android.os.Bundle
 import android.view.*
-import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import my.tarc.mycontact.databinding.FragmentFirstBinding
 
@@ -28,36 +28,33 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-
-
-
-        //Enable Option Menu
-        setHasOptionsMenu(true)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Enable Option Menu
+        setHasOptionsMenu(true)
 
         binding.buttonAdd.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        if(myViewModel.getContacts().size > 0)
-            binding.textViewCount.text = "No of record: ${myViewModel.getContacts().size}"
-        else
-            binding.textViewCount.text = "No record"
+        val adapter = ContactAdapter()
 
-        val dataAdapter = ArrayAdapter(view.context, android.R.layout.simple_list_item_1, myViewModel.getContacts())
 
-        binding.listViewContact.apply {
-            adapter = dataAdapter
-            setOnItemClickListener { parent, view, position, id ->
-                Toast.makeText(view.context, "Item selected :$position", Toast.LENGTH_SHORT).show()
-            }
-        }
+        myViewModel.contactList.observe(viewLifecycleOwner,
+            Observer {
+                if(it.isEmpty()){
+                    binding.textViewCount.text = "No record"
+                    Toast.makeText(context, "No record found", Toast.LENGTH_SHORT).show()
+                }else{
+                    binding.textViewCount.isVisible = false
+                    adapter.setContact(it)
+                }
+            })
 
+        binding.listViewContact.adapter = adapter
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -67,8 +64,8 @@ class FirstFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_profile-> {
+        when (item.itemId) {
+            R.id.action_profile -> {
                 Toast.makeText(context, "Refresh Data", Toast.LENGTH_SHORT).show()
                 true
             }

@@ -1,9 +1,13 @@
 package my.tarc.mycontact
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import my.tarc.mycontact.databinding.FragmentAboutBinding
 
@@ -28,6 +32,8 @@ class AboutFragment : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.tarc.edu.my"))
             if(intent.resolveActivity(context?.packageManager!!) != null){
                 startActivity(intent)
+            }else{
+                Toast.makeText(context, "No app could handle this action", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -57,6 +63,21 @@ class AboutFragment : Fragment() {
         binding.buttonAboutApp.setOnClickListener {
             val intent = Intent(context, SecondActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.buttonDialog.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+            builder.apply {
+                setTitle("Dialog Title")
+                setMessage("Dialog Message")
+                setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
+                    Toast.makeText(context, "Item Yes", Toast.LENGTH_SHORT).show()
+                })
+                setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
+                    Toast.makeText(context, "Item No", Toast.LENGTH_SHORT).show()
+                })
+                show()
+            }
         }
 
         return binding.root
