@@ -2,17 +2,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="my.tarc.mycontact.MainActivity">
-    <item
-        android:id="@+id/action_profile"
-        android:icon="@drawable/ic_baseline_refresh_24"
-        android:title="@string/profile"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/about" />
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    <group android:id="@+id/group_db" >
+        <item
+            android:id="@+id/action_sync"
+            android:icon="@drawable/ic_baseline_refresh_24"
+            android:title="@string/sync"
+            app:showAsAction="ifRoom" />
+    </group>
+    <group android:id="@+id/group_action">
+        <item
+            android:id="@+id/action_settings"
+            android:orderInCategory="100"
+            android:title="@string/action_settings"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_profile"
+            android:icon="@drawable/ic_baseline_refresh_24"
+            android:title="@string/profile"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_about"
+            android:title="@string/about" />
+    </group>
 </menu>

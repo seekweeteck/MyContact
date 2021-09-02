@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/menu/menu_main.xml" value="0.2682291666666667" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/drawable/divider.xml" value="0.2890625" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/layout/fragment_first.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/layout/fragment_profile.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/layout/record.xml" value="0.27291666666666664" />
+        <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/menu/menu_main.xml" value="0.26666666666666666" />
       </map>
     </option>
   </component>

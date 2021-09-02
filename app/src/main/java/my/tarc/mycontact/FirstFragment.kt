@@ -42,7 +42,6 @@ class FirstFragment : Fragment() {
 
         val adapter = ContactAdapter()
 
-
         myViewModel.contactList.observe(viewLifecycleOwner,
             Observer {
                 if(it.isEmpty()){
@@ -65,8 +64,8 @@ class FirstFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_profile -> {
-                Toast.makeText(context, "Refresh Data", Toast.LENGTH_SHORT).show()
+            R.id.action_sync -> {
+
                 true
             }
             else -> super.onOptionsItemSelected(item)

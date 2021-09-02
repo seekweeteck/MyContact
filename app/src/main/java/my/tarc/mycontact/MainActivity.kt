@@ -1,9 +1,11 @@
 package my.tarc.mycontact
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     //private val myViewModel: ContactViewModel by viewModels()
     private lateinit var myViewModel: ContactViewModel
 
+    private lateinit var  preferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +36,15 @@ class MainActivity : AppCompatActivity() {
         myViewModel.contactList.observe(this, Observer {
             Log.d("MainActivity", "Contact List Size:" + it.size)
         })
+
+        preferences = getPreferences(MODE_PRIVATE)
+
+        preferences.apply {
+            val name = getString("name", null)
+            val phone = getString("phone", null)
+            val pic = getString("pic", null)
+            myViewModel.profile = Profile(name, phone, pic)
+        }
 
         setSupportActionBar(binding.toolbar)
 
@@ -65,6 +78,11 @@ class MainActivity : AppCompatActivity() {
             R.id.action_profile ->{
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
                 navController.navigate(R.id.action_FirstFragment_to_ProfileFragment)
+                true
+            }
+            R.id.action_sync -> {
+                myViewModel.uploadContact()
+                Toast.makeText(this, "Uploading completed", Toast.LENGTH_SHORT).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

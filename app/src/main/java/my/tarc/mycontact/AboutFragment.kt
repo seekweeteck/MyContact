@@ -85,8 +85,7 @@ class AboutFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.action_profile).isVisible = false
-        menu.findItem(R.id.action_about).isVisible = false
-        menu.findItem(R.id.action_settings).isVisible = false
+        menu.setGroupVisible(R.id.group_action, false)
+        menu.setGroupVisible(R.id.group_db, false)
     }
 }

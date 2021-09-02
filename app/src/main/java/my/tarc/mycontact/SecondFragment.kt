@@ -64,8 +64,8 @@ class SecondFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         //Make Toolbar invisible
-        menu.findItem(R.id.action_profile).isVisible = false
-        menu.findItem(R.id.action_settings).isVisible = false
+        menu.setGroupVisible(R.id.group_action, false)
+        menu.setGroupVisible(R.id.group_db, false)
     }
 
     override fun onDestroyView() {
