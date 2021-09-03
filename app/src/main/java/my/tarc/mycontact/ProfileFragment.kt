@@ -141,31 +141,11 @@ class ProfileFragment : Fragment() {
             uploadPic()
             //downloadPic()
             savePreference(contactViewModel.profile)
+            contactViewModel.updateProfile(contactViewModel.profile)
         }
     }
 
-    private fun downloadPic() {
-        val myStorage = Firebase.storage("gs://my-contact-89b38.appspot.com")
-        val myStorageRef = myStorage.reference
-        val myProfileRef = myStorageRef.child("images")
-        val myProfileImageRef = myProfileRef.child(contactViewModel.profile.phone.toString())
 
-        val localFile = File.createTempFile("images", "jpg")
-
-        myProfileImageRef.getFile(localFile)
-            .addOnSuccessListener {
-                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                binding.imageViewPicture.setImageBitmap(bitmap)
-                contactViewModel.profile.pic = localFile.absolutePath.toUri().toString()
-                Toast.makeText(context, "Picture downloaded", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
-            }
-            .addOnProgressListener {
-
-            }
-    }
 
     fun savePreference(profile: Profile) {
         var preferences: SharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)!!
@@ -208,30 +188,56 @@ class ProfileFragment : Fragment() {
     }
 
     private fun uploadPic() {
-        if (filepath != null) {
+        val myStorage = Firebase.storage("gs://my-contact-89b38.appspot.com")
+        /*val myStorageRef = myStorage.reference
+        val myProfileRef = myStorageRef.child("images")
+        val myProfileImageRef = myProfileRef.child(contactViewModel.profile.phone.toString())*/
+        val myProfileImageRef = myStorage.reference.child("images").child(contactViewModel.profile.phone.toString())
 
-            binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
 
-            val myStorage = Firebase.storage("gs://my-contact-89b38.appspot.com")
-            val myStorageRef = myStorage.reference
-            val myProfileRef = myStorageRef.child("images")
-            val myProfileImageRef = myProfileRef.child(contactViewModel.profile.phone.toString())
-
-            myProfileImageRef.putFile(filepath)
-                .addOnSuccessListener { p0 ->
-                    binding.progressBar.visibility = View.GONE
-
-                    Toast.makeText(context, "File Uploaded", Toast.LENGTH_LONG).show()
-                }
-                .addOnFailureListener { p0 ->
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(context, p0.message, Toast.LENGTH_LONG).show()
-                }
-                .addOnProgressListener { p0 ->
-                    var progress: Double = (100.0 * p0.bytesTransferred) / p0.totalByteCount
-                    binding.progressBar.progress = progress.toInt()
-                }
-        }
+        myProfileImageRef.putFile(filepath)
+            .addOnSuccessListener {
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(context, "File Uploaded", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+            }
+            .addOnProgressListener {
+                var progress: Double = (100.0 * it.bytesTransferred) / it.totalByteCount
+                binding.progressBar.progress = progress.toInt()
+            }
     }
 
+    private fun downloadPic() {
+        val myStorage = Firebase.storage("gs://my-contact-89b38.appspot.com")
+        //val myStorageRef = myStorage.reference
+        //val myProfileRef = myStorageRef.child("images")
+        //val myProfileImageRef = myProfileRef.child(contactViewModel.profile.phone.toString())
+
+        val myProfileImageRef = myStorage.reference.child("images").child(contactViewModel.profile.phone.toString())
+
+        val localFile = File.createTempFile("images", "jpg")
+
+        binding.progressBar.visibility = View.VISIBLE
+
+        myProfileImageRef.getFile(localFile)
+            .addOnSuccessListener {
+                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                binding.imageViewPicture.setImageBitmap(bitmap)
+                contactViewModel.profile.pic = localFile.absolutePath.toUri().toString()
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(context, "Picture downloaded", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.GONE
+                Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+            .addOnProgressListener {
+                var progress: Double = (100.0 * it.bytesTransferred) / it.totalByteCount
+                binding.progressBar.progress = progress.toInt()
+            }
+    }
 }
