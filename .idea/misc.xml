@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/drawable/divider.xml" value="0.2890625" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2890625" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2890625" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/activity_second.xml" value="0.29583333333333334" />
         <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/fragment_blank.xml" value="0.20572916666666666" />
         <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/layout/record.xml" value="0.27291666666666664" />
         <entry key="..\:/AndroidStudioProjects/MyContact - Firebase/app/src/main/res/menu/menu_main.xml" value="0.2682291666666667" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/drawable/divider.xml" value="0.2890625" />
         <entry key="..\:/AndroidStudioProjects/MyContact/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />

@@ -39,4 +39,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="sync">Sync</string>
+    <string name="error_value_required">Value required</string>
+    <string name="delete">Delete</string>
 </resources>

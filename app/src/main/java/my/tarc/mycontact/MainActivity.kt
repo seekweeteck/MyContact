@@ -37,14 +37,14 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "Contact List Size:" + it.size)
         })
 
-        preferences = getPreferences(MODE_PRIVATE)
+        /*preferences = getSharedPreferences(applicationContext.packageName, MODE_PRIVATE)
 
         preferences.apply {
             val name = getString("name", null)
             val phone = getString("phone", null)
             val pic = getString("pic", null)
             myViewModel.profile = Profile(name, phone, pic)
-        }
+        }*/
 
         setSupportActionBar(binding.toolbar)
 

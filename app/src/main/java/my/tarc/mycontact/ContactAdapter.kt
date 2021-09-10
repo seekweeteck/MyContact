@@ -1,6 +1,5 @@
 package my.tarc.mycontact
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,24 +7,29 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+
+class ContactAdapter(private val cellClickListener: CellClickListener) :
+    RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     //Cached copy of contacts
     private var contactList = emptyList<Contact>()
 
-    class ViewHolder (view: View): RecyclerView.ViewHolder(view) {
-        val textViewName: TextView = view.findViewById(R.id.textViewContactName)
-        val textViewContact: TextView= view.findViewById(R.id.textViewContact)
+    interface CellClickListener {
+        fun onCellClickListener(data: Contact)
     }
 
-    internal fun setContact(contact: List<Contact>){
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textViewName: TextView = view.findViewById(R.id.textViewContactName)
+        val textViewContact: TextView = view.findViewById(R.id.textViewContact)
+    }
+
+    internal fun setContact(contact: List<Contact>) {
         this.contactList = contact
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //Create a new view, which define the UI of the list item
-        val view =  LayoutInflater.from(parent.context).inflate(R.layout.record, parent, false)
-
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.record, parent, false)
         return ViewHolder(view)
     }
 
@@ -34,13 +38,12 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
         holder.textViewName.text = contactList[position].name
         holder.textViewContact.text = contactList[position].phone
         holder.itemView.setOnClickListener {
-            //Item click event handler
-            Toast.makeText(it.context, "Contact name:" + contactList[position].name, Toast.LENGTH_SHORT).show()
+            val data = contactList[position]
+            cellClickListener.onCellClickListener(data)
         }
     }
 
     override fun getItemCount(): Int {
         return contactList.size
     }
-
 }

@@ -61,11 +61,6 @@ class AboutFragment : Fragment() {
         }
 
         binding.buttonAboutApp.setOnClickListener {
-            val intent = Intent(context, SecondActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.buttonDialog.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.apply {
                 setTitle("Dialog Title")
@@ -85,6 +80,7 @@ class AboutFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
+        menu.setGroupVisible(R.id.group_delete, false)
         menu.setGroupVisible(R.id.group_action, false)
         menu.setGroupVisible(R.id.group_db, false)
     }
