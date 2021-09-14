@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,10 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    //private val myViewModel: ContactViewModel by viewModels()
     private lateinit var myViewModel: ContactViewModel
-
-    private lateinit var  preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,20 +30,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Initialize ViewModel
         myViewModel = ViewModelProvider(this).get(ContactViewModel::class.java)
 
         myViewModel.contactList.observe(this, Observer {
             Log.d("MainActivity", "Contact List Size:" + it.size)
         })
-
-        /*preferences = getSharedPreferences(applicationContext.packageName, MODE_PRIVATE)
-
-        preferences.apply {
-            val name = getString("name", null)
-            val phone = getString("phone", null)
-            val pic = getString("pic", null)
-            myViewModel.profile = Profile(name, phone, pic)
-        }*/
 
         setSupportActionBar(binding.toolbar)
 
@@ -89,18 +80,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showHideMenu(visible: Boolean){
-        binding.toolbar.menu.findItem(R.id.action_settings).isVisible = visible
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
 
-   /* companion object{
-        val contactList = ArrayList<Contact>()
-        private var index = -1
-    }*/
 }

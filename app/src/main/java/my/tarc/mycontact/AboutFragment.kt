@@ -60,21 +60,6 @@ class AboutFragment : Fragment() {
             }
         }
 
-        binding.buttonAboutApp.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
-            builder.apply {
-                setTitle("Dialog Title")
-                setMessage("Dialog Message")
-                setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, which ->
-                    Toast.makeText(context, "Item Yes", Toast.LENGTH_SHORT).show()
-                })
-                setNegativeButton("No", DialogInterface.OnClickListener { dialog, which ->
-                    Toast.makeText(context, "Item No", Toast.LENGTH_SHORT).show()
-                })
-                show()
-            }
-        }
-
         return binding.root
     }
 
@@ -84,4 +69,6 @@ class AboutFragment : Fragment() {
         menu.setGroupVisible(R.id.group_action, false)
         menu.setGroupVisible(R.id.group_db, false)
     }
+
+
 }

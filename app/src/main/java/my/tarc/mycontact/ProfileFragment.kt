@@ -100,7 +100,7 @@ class ProfileFragment : Fragment() {
             }
             //binding.textViewPath.text = contactViewModel.profile.pic
         } else {
-            binding.imageViewPicture.setImageResource(R.drawable.ic_baseline_account_circle_24)
+            binding.imageViewPicture.setImageResource(R.drawable.profile)
         }
 
         binding.imageViewPicture.setOnClickListener {

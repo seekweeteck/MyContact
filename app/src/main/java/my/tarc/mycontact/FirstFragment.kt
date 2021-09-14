@@ -1,6 +1,9 @@
 package my.tarc.mycontact
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.*
 import android.widget.TextView
@@ -12,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import my.tarc.mycontact.databinding.FragmentFirstBinding
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -39,7 +43,7 @@ class FirstFragment : Fragment(), ContactAdapter.CellClickListener {
         //Enable Option Menu
         setHasOptionsMenu(true)
 
-        binding.buttonAdd.setOnClickListener {
+        binding.fab.setOnClickListener {
             myViewModel.editMode = false
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -49,8 +53,9 @@ class FirstFragment : Fragment(), ContactAdapter.CellClickListener {
         myViewModel.contactList.observe(viewLifecycleOwner,
             Observer {
                 if(it.isEmpty()){
-                    binding.textViewCount.text = "No record"
-                    Toast.makeText(context, "No record found", Toast.LENGTH_SHORT).show()
+                    val calendar = Calendar.getInstance()
+                    binding.textViewCount.text = "No record ${calendar.get(Calendar.HOUR)}"
+                    //Toast.makeText(context, "No record found", Toast.LENGTH_SHORT).show()
                 }else{
                     binding.textViewCount.isVisible = false
                     adapter.setContact(it)
@@ -83,10 +88,23 @@ class FirstFragment : Fragment(), ContactAdapter.CellClickListener {
         Log.d("First Fragment", "onDestroy")
     }
 
-    override fun onCellClickListener(data: Contact) {
-        myViewModel.editMode = true
-        myViewModel.selectedContact = data
-        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+    override fun onCellClickListener(data: Contact, mode: Int) {
+        if(mode == 1){
+            myViewModel.editMode = true
+            myViewModel.selectedContact = data
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }else if(mode == 2){
+            val builder = AlertDialog.Builder(context)
+            builder.apply {
+                setMessage("Delete contact ${data.phone} ?")
+                setPositiveButton("Delete", DialogInterface.OnClickListener { dialog, which ->
+                    myViewModel.deleteContact(data)
+                    Toast.makeText(context, "Contact deleted", Toast.LENGTH_SHORT).show()
+                })
+                setNegativeButton("Cancel", null)
+                show()
+            }
+        }
     }
 
 }
