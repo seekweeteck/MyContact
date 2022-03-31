@@ -105,9 +105,9 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
             val myRef = firebaseDatabase.getReference("profile")
 
             for (contact in contactList.value?.iterator()!!) {
-                myRef.child(profile?.phone!!.toString()).child("contact_list").child(contact.phone)
+                myRef.child(profile.phone!!.toString()).child("contact_list").child(contact.phone)
                     .child(PROFILE_NAME).setValue(contact.name)
-                myRef.child(profile?.phone!!.toString()).child("contact_list").child(contact.phone)
+                myRef.child(profile.phone!!.toString()).child("contact_list").child(contact.phone)
                     .child(PROFILE_PHONE).setValue(contact.phone)
             }
         }else{
